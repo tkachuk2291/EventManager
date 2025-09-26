@@ -86,3 +86,18 @@ python manage.py migrate
 - `PUT /events/<int:id>/` — Update an event by ID.
 - `DELETE /events/<int:id>/` — Delete an event by ID.
 - `POST /events/register/<int:id>/` — Register a manager for an event by ID.
+
+
+###  Filtering & Search
+   title , description , date ,location - fot this field can be filtering or search
+
+Example:  
+http://127.0.0.1:8000/events/?title=Test    
+http://127.0.0.1:8000/events/?description=how  
+http://127.0.0.1:8000/events/?description=204-05-09  
+http://127.0.0.1:8000/events/?location=Lviv  
+
+
+
+
+       
