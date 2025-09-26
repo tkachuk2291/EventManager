@@ -7,7 +7,7 @@
    ```
    git clone https://github.com/tkachuk2291/EventManager.git  
 ```bash
-cd eventManagement
+cd EventManager(if still not activate)
 ```
 
 2. **Create and activate a virtual environment:**
@@ -34,7 +34,7 @@ createdb event_management-db
 
    Create a `.env` file in the project root with the following variables (example):
    
-env_example
+env_example or see file [.env-example](.env-example)
 ```
 Django
 ----
@@ -43,7 +43,7 @@ DEBUG=True
 ----
 Database
 ----
-NAME=city_temperature  
+NAME=event_management-db
 USER=user_db 
 HOST=localhost  
 PORT=5432**  
