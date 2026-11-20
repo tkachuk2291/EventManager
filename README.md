@@ -1,103 +1,87 @@
-```markdown
 # EventManager
- ```
-## Installation
- ```
-1. **Clone the repository:**
-   ```
-   git clone https://github.com/tkachuk2291/EventManager.git  
-```bash
-cd EventManager(if still not activate)
-```
 
-2. **Create and activate a virtual environment:**
+Event management REST API built with Django and Django REST Framework. JWT authentication, PostgreSQL, OpenAPI docs (Swagger UI / ReDoc).
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/tkachuk2291/EventManager.git
+   cd EventManager
    ```
-   python3 -m venv venv  
+
+2. Create and activate a virtual environment:
+
+   ```bash
+   python3 -m venv venv
    source venv/bin/activate
    ```
 
-3. **Install dependencies:**
-   ```
+3. Install dependencies:
+
+   ```bash
    pip install -r requirements.txt
    ```
-   
-   
-3.1 Database Setup 
 
-```
-1. Make sure you have PostgreSQL installed on your computer.
-2. open terminal and create new db for command
-````
-createdb event_management-db
- 
-4. **Configure environment variables:**
+4. Create a PostgreSQL database (PostgreSQL must be installed):
 
-   Create a `.env` file in the project root with the following variables (example):
-   
-env_example or see file [.env-example](.env-example)
-```
-Django
-----
-SECRET_KEY=secret_key  
-DEBUG=True  
-----
-Database
-----
-NAME=event_management-db
-USER=user_db 
-HOST=localhost  
-PORT=5432**  
----
-```
-
-5. **Apply migrations:**
-
-python manage.py migrate
-```
-
-6. **Run the development server:**
+   ```bash
+   createdb event_management-db
    ```
+
+5. Create a `.env` file in the project root (see [.env-example](.env-example)):
+
+   ```
+   SECRET_KEY=secret_key
+   DEBUG=True
+
+   NAME=event_management-db
+   USER=user_db
+   HOST=localhost
+   PORT=5432
+   ```
+
+6. Apply migrations and run the server:
+
+   ```bash
+   python manage.py migrate
    python manage.py runserver
    ```
 
-7. **API documentation (Swagger UI):**  
-   [http://127.0.0.1:8000/api/schema/swagger-ui/](http://127.0.0.1:8000/api/schema/swagger-ui/)
+## API documentation
 
----
+- Swagger UI: http://127.0.0.1:8000/api/schema/swagger-ui/
+- ReDoc: http://127.0.0.1:8000/api/schema/redoc/
 
-## API Endpoints
+## API endpoints
+
+### Users
+
+- `POST /users/register/` — register a new user
+- `GET /users/` — list users
+- `POST /users/` — create a user
+- `GET /users/<id>/` — get a user
+- `PUT /users/<id>/` — update a user
+- `DELETE /users/<id>/` — delete a user
+- `POST /users/login/` — obtain JWT access and refresh tokens
+- `POST /users/token/refresh/` — refresh the access token
+
+### Events
+
+- `GET /events/` — list events
+- `POST /events/` — create an event
+- `GET /events/<id>/` — get an event
+- `PUT /events/<id>/` — update an event
+- `DELETE /events/<id>/` — delete an event
+- `POST /events/register/<id>/` — register a manager for an event
+
+### Filtering
+
+`GET /events/` accepts the query parameters `title`, `description`, `date` and `location` (case-insensitive partial match):
+
 ```
-### User Endpoints
-
-- `POST /users/register/` — Register a new user.
-- `GET /users/` — List all users.
-- `POST /users/` — Create a new user.
-- `GET /users/<int:pk>/` — Retrieve a user by ID.
-- `PUT /users/<int:pk>/` — Update a user by ID.
-- `DELETE /users/<int:pk>/` — Delete a user by ID.
-- `POST /users/login/` — Obtain JWT access and refresh tokens.
-- `POST /users/token/refresh/` — Refresh JWT access token.
-
-### Event Endpoints
-
-- `GET /events/` — List all events.
-- `POST /events/` — Create a new event.
-- `GET /events/<int:id>/` — Retrieve an event by ID.
-- `PUT /events/<int:id>/` — Update an event by ID.
-- `DELETE /events/<int:id>/` — Delete an event by ID.
-- `POST /events/register/<int:id>/` — Register a manager for an event by ID.
-
-
-###  Filtering & Search
-   title , description , date ,location - fot this field can be filtering or search
-
-Example:  
-http://127.0.0.1:8000/events/?title=Test    
-http://127.0.0.1:8000/events/?description=how  
-http://127.0.0.1:8000/events/?description=204-05-09  
-http://127.0.0.1:8000/events/?location=Lviv  
-
-
-
-
-       
+/events/?title=Test
+/events/?location=Lviv
+/events/?date=2024-05-09
+```
